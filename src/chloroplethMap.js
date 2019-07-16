@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Datamap from 'datamaps/dist/datamaps.world.min.js';
-import d3, { selection } from 'd3';
+import d3 from 'd3';
 import WorldJson from './World.topo.json';
+import {event as currentEvent} from 'd3';
 
 class ChloroplethMap extends Component {
 
@@ -37,9 +38,19 @@ class ChloroplethMap extends Component {
 
           var g = svg.append("g");
 
+
+          // zoom code from: https://bl.ocks.org/piwodlaiwo/90777c94b0cd9b6543d9dfb8b5aefeef
+          // let zoom = d3.zoom.on("zoom", this.zoomed());
+          console.log(this.zoomed())
+          let zoom = d3.zoom().on("zoom", this.zoomed());
+
           svg
-            .call(zoom)
-            d3.json("https://gist.githubusercontent.com/mbostock/4090846/raw/d534aba169207548a8a3d670c9c2cc719ff05c47/world-50m.json", function(error, world) {
+            .call(zoom) // delete this line to disable free zooming
+            // .call(zoom.event); // not in d3 v4
+
+
+
+          d3.json("https://gist.githubusercontent.com/mbostock/4090846/raw/d534aba169207548a8a3d670c9c2cc719ff05c47/world-50m.json", function(error, world) {
           if (error) throw error;
 
           g.selectAll("path")
@@ -84,10 +95,7 @@ class ChloroplethMap extends Component {
                 .call( zoom.transform, d3.zoomIdentity ); // updated for d3 v4
           }
 
-
         let dataset = {};
-        // zoom code from: https://bl.ocks.org/piwodlaiwo/90777c94b0cd9b6543d9dfb8b5aefeef
-        let zoom = selection.call(d3.zoom().on("zoom", this.zoomed()));
 
         // We need to colorize every country based on "numberOfWhatever"
         // colors should be uniq for every value.
@@ -157,17 +165,19 @@ class ChloroplethMap extends Component {
 
     zoomed(){
       let g = document.getElementsByTagName("g")[0]
-      console.log(g)
-      g.style("stroke-width", 1.5 / d3.event.transform.k + "px");
+      console.log(currentEvent)
+      g.style("stroke-width", 1.5 / currentEvent.k + "px");
       // g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")"); // not in d3 v4
-      g.attr("transform", d3.event.transform); // updated for d3 v4
+      g.attr("transform", currentEvent.transform); // updated for d3 v4
+      console.log(g)
     }
 
     // If the drag behavior prevents the default click,
     // also stop propagation so we don’t click-to-zoom.
     stopped() {
-      if (d3.event.defaultPrevented) d3.event.stopPropagation();
+    //   if (d3.event.defaultPrevented) d3.event.stopPropagation();
     }
+
     render() {
         return (
             <div id="chloropleth_map" style={{
