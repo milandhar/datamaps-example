@@ -58,7 +58,7 @@ class App extends Component {
 
   componentDidMount(){
     console.log('in fetch')
-    return fetch("https://api.globalgiving.org/api/public/projectservice/regions/countries/projects/count?api_key=4be97db5-e712-49b1-bae9-12c85422ce7a", {
+    return fetch("https://api.globalgiving.org/api/public/projectservice/regions/countries/projects/active/count?api_key=4be97db5-e712-49b1-bae9-12c85422ce7a", {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -81,8 +81,30 @@ class App extends Component {
     })
   }
 
+  // loadData = () => {
+  //   let newDataArray = []
+  //   console.log('in fetch')
+  //   return fetch("https://api.globalgiving.org/api/public/projectservice/regions/countries/projects/count?api_key=4be97db5-e712-49b1-bae9-12c85422ce7a", {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //      }
+  //   })
+  //   .then(res => res.json())
+  //   .then(json => {
+  //     const getCountryISO3 = require("country-iso-2-to-3");
+  //     json.regions.region.forEach((region)=> {
+  //       region.countries.country.forEach((country)=> {
+  //         newDataArray.push([getCountryISO3(country.iso3166CountryCode), country.projectCount])
+  //       })
+  //     })
+  //   })
+  //   console.log(newDataArray)
+  //   return newDataArray
+  // }
+
   render() {
-    {console.log(this.state.data)}
     return (
       <div className="app-div" style={{
         height:"250vh",

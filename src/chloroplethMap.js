@@ -5,14 +5,14 @@ import WorldJson from './World.topo.json';
 
 class ChloroplethMap extends Component {
 
-    constructor(props){
-      super(props)
-      this.state = {
-        countryData: this.props.data
-      }
-    }
+    // constructor(props){
+    //   super(props)
+    //   this.state = {
+    //     countryData: this.props.data
+    //   }
+    // }
 
-    componentDidMount() {
+    componentDidUpdate() {
         // Datamaps expect data in format:
         // { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},
         //   "FRA": { "fillColor": "#8dc386", numberOfWhatever: 43 } }
@@ -21,7 +21,7 @@ class ChloroplethMap extends Component {
         // We need to colorize every country based on "numberOfWhatever"
         // colors should be uniq for every value.
         // For this purpose we create palette(using min/max this.props.data-value)
-        console.log(this.props.data)
+
         let onlyValues = this.props.data.map(function (obj) { return obj[1]; });
         let minValue = Math.min.apply(null, onlyValues),
             maxValue = Math.max.apply(null, onlyValues);
@@ -84,6 +84,7 @@ class ChloroplethMap extends Component {
         });
     }
     render() {
+      {console.log(this.props.data)}
         return (
             <div id="chloropleth_map" style={{
                 height: "180vh",
