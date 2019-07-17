@@ -21,6 +21,7 @@ class ChloroplethMap extends Component {
         // We need to colorize every country based on "numberOfWhatever"
         // colors should be uniq for every value.
         // For this purpose we create palette(using min/max this.props.data-value)
+        console.log(this.props.data)
         let onlyValues = this.props.data.map(function (obj) { return obj[1]; });
         let minValue = Math.min.apply(null, onlyValues),
             maxValue = Math.max.apply(null, onlyValues);
