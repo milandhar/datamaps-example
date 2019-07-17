@@ -5,6 +5,13 @@ import WorldJson from './World.topo.json';
 
 class ChloroplethMap extends Component {
 
+    constructor(props){
+      super(props)
+      this.state = {
+        countryData: this.props.data
+      }
+    }
+
     componentDidMount() {
         // Datamaps expect data in format:
         // { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},

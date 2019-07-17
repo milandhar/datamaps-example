@@ -26,6 +26,27 @@ class App extends Component {
       ["CAF",93],["COD",36],["CZE",77],["CYP",65],["CXR",14],["CRI",31],
       ["CUW",67],["CPV",63],["CUB",40],["SWZ",58],["SYR",96],["SXM",31]]
   }
+
+  componentDidMount(){
+    console.log('in mount')
+    fetch("https://api.globalgiving.org/api/public/projectservice/regions/countries/projects/count?api_key=4be97db5-e712-49b1-bae9-12c85422ce7a", {
+      headers : {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    })
+    .then(response => response.json())
+    .then(json => console.log(json))
+    //
+    // let xml =
+    // ``
+    //
+    // let options = {ignoreComment: true, alwaysChildren: true};
+    // let convert = require('xml-js')
+    // let json = convert.xml2js(xml, options)
+    // console.log(json)
+  }
+
   render() {
     return (
       <div className="app-div" style={{
