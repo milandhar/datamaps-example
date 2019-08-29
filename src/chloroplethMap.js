@@ -4,15 +4,7 @@ import d3 from 'd3';
 import WorldJson from './World.topo.json';
 
 class ChloroplethMap extends Component {
-
-    // constructor(props){
-    //   super(props)
-    //   this.state = {
-    //     countryData: this.props.data
-    //   }
-    // }
-
-    componentDidUpdate() {
+    componentDidMount() {
         // Datamaps expect data in format:
         // { "USA": { "fillColor": "#42a844", numberOfWhatever: 75},
         //   "FRA": { "fillColor": "#8dc386", numberOfWhatever: 43 } }
@@ -88,8 +80,8 @@ class ChloroplethMap extends Component {
             // projection: 'mercator'
             setProjection: function (element) {
                 var projection = d3.geo.mercator()
-                    .center([0, 40]) // always in [East Latitude, North Longitude]
-                    .scale(200)
+                    .center([0, 0]) // always in [East Latitude, North Longitude]
+                    .scale(230)
                     .translate([element.offsetWidth / 3, element.offsetHeight / 3]);
 
                 var path = d3.geo.path().projection(projection);
