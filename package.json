@@ -5,6 +5,7 @@
   "dependencies": {
     "country-iso-2-to-3": "^1.0.1",
     "datamaps": "^0.5.9",
+    "eslint-utils": ">=1.4.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
